@@ -7,12 +7,28 @@ services:
 
 env:
   - DJANGO_SETTINGS_MODULE=mysite.settings
+  global:
+  - COVERALLS_REPO_TOKEN=dBx1hvfRo10NfRMeubGZSO0b2zX799fcNYkj
 
 install:
   - pip install -r requirements.txt
 
-script:
-  - python manage.py test
 
 after_success:
+  - coverage run --source='.' manage.py test
   - coveralls
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-west-2"
+  app: "mysite"
+  env: "my-env"
+  bucket_name: "*"
+  on:
+    branch: main
+
+script:
+  - black --check .
+  - flake8 .
+  - python manage.py test
+

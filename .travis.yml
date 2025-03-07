@@ -6,8 +6,8 @@ services:
   - postgresql
 
 env:
-  - DJANGO_SETTINGS_MODULE=mysite.settings
   global:
+  - DJANGO_SETTINGS_MODULE=mysite.settings
   - COVERALLS_REPO_TOKEN=dBx1hvfRo10NfRMeubGZSO0b2zX799fcNYkj
 
 install:

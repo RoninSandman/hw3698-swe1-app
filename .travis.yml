@@ -1,0 +1,18 @@
+language: python
+python:
+  - "3.9"
+
+services:
+  - postgresql
+
+env:
+  - DJANGO_SETTINGS_MODULE=mysite.settings
+
+install:
+  - pip install -r requirements.txt
+
+script:
+  - python manage.py test
+
+after_success:
+  - coveralls
